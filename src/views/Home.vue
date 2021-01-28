@@ -8,9 +8,7 @@
         @select="handleSelect"
       >
         <el-menu-item class="nav-bar-item" index="1">实时检测</el-menu-item>
-        <el-menu-item class="nav-bar-item" index="2"
-          >上传视频/图片
-        </el-menu-item>
+        <el-menu-item class="nav-bar-item" index="2">上传图片 </el-menu-item>
       </el-menu>
     </div>
 
