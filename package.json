@@ -1,11 +1,7 @@
 {
   "name": "facialexpressionrecognition",
   "version": "0.1.0",
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:SWZDL/ExpressionRecognition_vue.git"
-  },
-  "private": true,
+  "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
