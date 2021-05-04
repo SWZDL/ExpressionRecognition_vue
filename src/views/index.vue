@@ -1,11 +1,14 @@
 <template>
   <el-container>
     <el-header>
-      <el-menu :default-active="'1'" mode="horizontal" @select="handleSelect">
-        <el-menu-item index="1">首页</el-menu-item>
-        <el-menu-item index="2">文档</el-menu-item>
-        <el-menu-item index="3">客户支持</el-menu-item>
-        <el-menu-item index="4">合作与生态</el-menu-item>
+      <el-menu :default-active="'1'" mode="horizontal" :router="true">
+        <el-menu-item index="/">首页</el-menu-item>
+        <el-menu-item index="/file">文档</el-menu-item>
+        <el-menu-item index="/support">客户支持</el-menu-item>
+        <el-menu-item index="/cooperation">合作与生态</el-menu-item>
+        <el-menu-item style="float: right" index="/recognition">
+          <el-button>开始使用</el-button>
+        </el-menu-item>
       </el-menu>
     </el-header>
 
@@ -123,15 +126,7 @@ export default {
       ]
     };
   },
-  methods: {
-    handleSelect() {},
-
-    cancelForm() {
-      this.loading = false;
-      this.dialog = false;
-      clearTimeout(this.timer);
-    }
-  }
+  methods: {}
 };
 </script>
 <style>
