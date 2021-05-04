@@ -1,164 +1,111 @@
 <template>
   <el-container>
     <el-header>
-      <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-        <el-menu-item index="1">文档</el-menu-item>
-        <el-menu-item index="2">客户支持</el-menu-item>
-        <el-menu-item index="3">合作与生态</el-menu-item>
+      <el-menu :default-active="'1'" mode="horizontal" @select="handleSelect">
+        <el-menu-item index="1">首页</el-menu-item>
+        <el-menu-item index="2">文档</el-menu-item>
+        <el-menu-item index="3">客户支持</el-menu-item>
+        <el-menu-item index="4">合作与生态</el-menu-item>
       </el-menu>
-      <div class="line"></div>
     </el-header>
+
     <el-main>
-      <el-button type="text" @click="dialog = true">打开嵌套的Drawer</el-button>
+      <div
+        style="margin-left:50%;transform:translate(-50%,0);width: 75%;display: flex;flex-direction: row"
+      >
+        <el-carousel class="carousel-left" height="18vw">
+          <el-carousel-item v-for="item in carousel_src" :key="item.src">
+            <div
+              style="height:10%;color: black;text-align: center;font-weight: bold"
+            >
+              点击查看识别结果
+            </div>
+            <img
+              v-bind:src="item.src"
+              :alt="item.src"
+              width="100%"
+              height="90%"
+            />
+          </el-carousel-item>
+        </el-carousel>
 
-      <el-row>
-        <el-col  :span="14" :offset="2">
-          <div class="grid-content bg-purple grid-content_left" style="height: 600px; " >
-
-            <el-col :span="24" >
-              <div class="grid-content bg-purple" style="height: 500px">
-                <el-row>
-                  <el-col :span="24">
-                    <div class="grid-content bg-purple">
-                      <el-image :src="src" :fit="contain" style="height: 500px"></el-image>
-                      <el-drawer
-                          title="接口调用结果"
-                          :show-close="false"
-                          :visible.sync="dialog"
-                          direction="rtl"
-                          :wrapperClosable="false"
-                          :modal="false"
-                          :modal-append-to-body="false"
-                          :append-to-body="false"
-                          style="position:absolute"
-                          custom-class="demo-drawer"
-                          ref="drawer"
-                      >
-                        <div class="demo-drawer__content">
-                          <el-button type="text" icon="el-icon-arrow-right" @click="cancelForm" ></el-button>
-                        </div>
-                      </el-drawer>
-                    </div>
-                  </el-col>
-                </el-row>
+        <div class="div-right">
+          <div class="div-right-line-one">
+            <div class="sub-div hvr-sweep-to-top">
+              <div class="title">【WHAT】快速了解本平台</div>
+              <div style="margin-left: 10%;margin-top: 10%">
+                <a href="#">立即了解></a>
               </div>
-            </el-col>
-            <el-col :span="24">
-              <div class="grid-content bg-purple" style="height: 100px;">
-                <el-col :span="24">
-                  <el-col :span="20">
-                    <div class="grid-content bg-purple" >
-                      <el-input placeholder="请输入图片URL" v-model="input3" class="input-with-select">
-                        <el-button slot="append" icon="el-icon-search"></el-button>
-                      </el-input>
-                    </div>
-                  </el-col>
-                  <el-col :span="4">
-                    <div class="grid-content bg-purple">
-                      <el-upload
-                          class="upload-demo"
-                          action="https://jsonplaceholder.typicode.com/posts/"
-                          :on-preview="handlePreview"
-                          :on-remove="handleRemove"
-                          :before-remove="beforeRemove"
-                          multiple
-                          :limit="3"
-                          :on-exceed="handleExceed"
-                          :file-list="fileList">
-                        <el-button size="small" type="primary">点击上传</el-button>
-                      </el-upload>
-                    </div>
-                  </el-col>
-                </el-col>
-                <el-col :span="24" :offset="8">
-                  <div class="grid-content bg-purple" >
-                    <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
-                  </div>
-                </el-col>
+            </div>
+            <div class="sub-div hvr-sweep-to-top">
+              <div class="title">【WHY】为什么需要我们</div>
+              <div style="margin-left: 10%;margin-top: 10%">
+                <a href="#">立即了解></a>
               </div>
-            </el-col>
-
+            </div>
+            <div class="sub-div hvr-sweep-to-top">
+              <div class="title">【WHO】谁可以使用本平台</div>
+              <div style="margin-left: 10%;margin-top: 10%">
+                <a href="#">立即了解></a>
+              </div>
+            </div>
           </div>
-        </el-col>
-        <el-col :span="6">
-          <div class="grid-content bg-purple grid-content-right" style="height: 600px;">
-            <el-col :span="10" :offset="1">
-              <div class="grid-content bg-purple">
-                <el-button>
-                  <div class="block">
-                    <el-image :src="src_1" style="width: 100px; height: 100px" @click="src=src_1"></el-image>
-                  </div>
-                </el-button>
+          <div class="div-right-line-two">
+            <div class="sub-div hvr-sweep-to-top">
+              <div class="title hvr-sweep-to-top">【WHEN】产品开发日志</div>
+              <div style="margin-left: 10%;margin-top: 10%">
+                <a href="#">立即了解></a>
               </div>
-            </el-col>
-            <el-col :span="10" :offset="2">
-              <div class="grid-content bg-purple">
-                <el-button>
-                  <div class="block">
-                    <el-image :src="src_2" style="width: 100px; height: 100px" @click="src=src_2"></el-image>
-                  </div>
-                </el-button>
+            </div>
+            <div class="sub-div hvr-sweep-to-top">
+              <div class="title">
+                【WHICH】何种企业需要我们
               </div>
-            </el-col>
-            <el-col :span="10" :offset="1">
-              <div class="grid-content bg-purple">
-                <el-button>
-                  <div class="block">
-                    <el-image :src="src_3" style="width: 100px; height: 100px"></el-image>
-                  </div>
-                </el-button>
+              <div style="margin-left: 10%;margin-top: 10%">
+                <a href="#">立即了解></a>
               </div>
-            </el-col>
-            <el-col :span="10" :offset="2">
-              <div class="grid-content bg-purple">
-                <el-button>
-                  <div class="block">
-                    <el-image :src="src_4" style="width: 100px; height: 100px"></el-image>
-                  </div>
-                </el-button>
+            </div>
+            <div class="sub-div hvr-sweep-to-top">
+              <div class="title">【HOW】如何使用</div>
+              <div style="margin-left: 10%;margin-top: 10%">
+                <a href="#">立即了解></a>
               </div>
-            </el-col>
-            <el-col :span="10" :offset="1">
-              <div class="grid-content bg-purple">
-                <el-button>
-                  <div class="block">
-                    <el-image :src="src_5" style="width: 100px; height: 100px"></el-image>
-                  </div>
-                </el-button>
-              </div>
-            </el-col>
-            <el-col :span="10" :offset="2">
-              <div class="grid-content bg-purple">
-                <el-button>
-                  <div class="block">
-                    <el-image :src="src_6" style="width: 100px; height: 100px"></el-image>
-                  </div>
-                </el-button>
-              </div>
-            </el-col>
-            <el-col :span="10" :offset="1">
-              <div class="grid-content bg-purple">
-                <el-button>
-                  <div class="block">
-                    <el-image :src="src_7" style="width: 100px; height: 100px"></el-image>
-                  </div>
-                </el-button>
-              </div>
-            </el-col>
-            <el-col :span="10" :offset="2">
-              <div class="grid-content bg-purple">
-                <el-button>
-                  <div class="block">
-                    <el-image :src="src_8" style="width: 100px; height: 100px"></el-image>
-                  </div>
-                </el-button>
-              </div>
-            </el-col>
+            </div>
           </div>
-        </el-col>
-
-      </el-row>
+        </div>
+      </div>
     </el-main>
+
+    <div style="width: 100%;background-color:#fff;height: 100px"></div>
+
+    <div style="display: flex">
+      <div
+        style="text-align:center;margin-left: 50%;transform: translate(-50%,0)"
+      >
+        <el-upload
+          class="home-upload"
+          drag
+          action="https://jsonplaceholder.typicode.com/posts/"
+          multiple
+        >
+          <i class="el-icon-upload"></i>
+          <div class="el-upload__text">点击尝试识别图片</div>
+          <div class="el-upload__tip" slot="tip">
+            只能上传jpg/png文件，且不超过500kb
+          </div>
+        </el-upload>
+      </div>
+    </div>
+
+    <el-footer>
+      <div
+        style="height: 500px;margin-top:100px;background-color:black;width: 100vw;margin-left: -2%;color: white;"
+      >
+        <div style="padding-top: 10%">
+          <h1 style="text-align: center;">这里是页脚</h1>
+        </div>
+      </div>
+    </el-footer>
   </el-container>
 </template>
 
@@ -166,34 +113,68 @@
 export default {
   data() {
     return {
-      dialog: false,
-      loading: false,
-      timer: null,
-      src:"https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fdpic.tiankong.com%2Ffi%2F1m%2FQJ8631204164.jpg&refer=http%3A%2F%2Fdpic.tiankong.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1621180695&t=c80953b37d7aa4b045673da0aea7a5f6",
-      src_1:"https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fdpic.tiankong.com%2Ffi%2F1m%2FQJ8631204164.jpg&refer=http%3A%2F%2Fdpic.tiankong.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1621180695&t=c80953b37d7aa4b045673da0aea7a5f6",
-      src_2:"https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fp1.meituan.net%2Fwedding%2Fd3ed7a125092567c169156bf2f50d56057383.jpg&refer=http%3A%2F%2Fp1.meituan.net&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1621180742&t=6048478aecee24f0af52ca6919e7773e",
-      src_3:"https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fhzdaily.hangzhou.com.cn%2Fdskb%2Fmedia%2F1%2F3%2F2009-08%2F10%2F15%2Fres02_attpic_brief.jpg&refer=http%3A%2F%2Fhzdaily.hangzhou.com.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1621180842&t=7b682f0b035eb5b0f05ddba8c01a15ec",
-      src_4:"https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg1.gtimg.com%2Ffashion%2Fpics%2Fhv1%2F3%2F19%2F2240%2F145660848.png&refer=http%3A%2F%2Fimg1.gtimg.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1621180928&t=89ab323d27887106a2dc0054fb879228",
-      src_5:"https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimage.biaobaiju.com%2Fuploads%2F20190624%2F10%2F1561341616-zIldrNkRUc.jpg&refer=http%3A%2F%2Fimage.biaobaiju.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1621180964&t=412de8ad431a793211641d034cf00fab",
-      src_6:"https://gimg2.baidu.com/image_search/src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20190419%2F490ce2d8656545198e56faaf888b419d.jpeg&refer=http%3A%2F%2F5b0988e595225.cdn.sohucs.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1621180985&t=723e4d9ae1b67930d259286146296040",
-      src_7:"https://gss0.baidu.com/70cFfyinKgQFm2e88IuM_a/image/c0=shijue1,0,0,294,40/sign=0a2c730f9d2bd40756cadbbe13e0f424/34fae6cd7b899e510cbbd73348a7d933c8950ddb.jpg",
-      src_8:"https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2779491931,296125921&fm=26&gp=0.jpg"
-    }
+      carousel_src: [
+        //  https://imgtu.com/i/g9g9HK
+        { src: "https://z3.ax1x.com/2021/04/27/g9g9HK.jpg" },
+        //  https://imgtu.com/i/g9gF4e
+        { src: "https://z3.ax1x.com/2021/04/27/g9gF4e.jpg" },
+        //  https://imgtu.com/i/g9giND
+        { src: "https://z3.ax1x.com/2021/04/27/g9giND.jpg" }
+      ]
+    };
   },
   methods: {
+    handleSelect() {},
+
     cancelForm() {
       this.loading = false;
       this.dialog = false;
       clearTimeout(this.timer);
     }
   }
-}
+};
 </script>
 <style>
-.grid-content_left{
-  background-color: #DCDFE6;
+body {
+  overflow-x: hidden;
 }
-.grid-content-right{
-  background-color: #E4E7ED;
+.carousel-left {
+  border: 1px solid #dadcdf;
+  width: 20%;
+  opacity: 0.75;
+}
+.div-right {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+}
+.div-right-line-one {
+  display: flex;
+  flex-direction: row;
+}
+
+.div-right-line-two {
+  display: flex;
+  flex-direction: row;
+}
+.sub-div {
+  width: 32%;
+  height: 10vw;
+  margin: 1px;
+  border: 1px solid #dadcdf;
+}
+.title {
+  color: black;
+  line-height: 50%;
+  font-size: 1vw;
+  text-align: center;
+  margin-top: 20%;
+}
+a {
+  text-decoration: none;
+  color: #8d99ae;
+}
+a:hover {
+  color: #023047;
 }
 </style>

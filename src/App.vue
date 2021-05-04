@@ -12,4 +12,11 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+@import "css/hover-min.css";
+body,
+html {
+  margin: 0;
+  padding: 0;
+}
+</style>
